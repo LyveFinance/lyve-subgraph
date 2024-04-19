@@ -1,0 +1,12 @@
+{
+  "linea": {
+    "BorrowerOperations": {
+      "address": "0xAa098708068B836D52833E656597C1A0DD2bB654",
+      "startBlock": 817768
+    },
+    "StabilityPool": {
+      "address": "0x55C42B42661c77809E31f2D06Db1637De8CF7979",
+      "startBlock": 3122084
+    }
+  }
+}

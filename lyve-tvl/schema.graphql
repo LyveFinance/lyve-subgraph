@@ -1,0 +1,103 @@
+type AdminChanged @entity(immutable: true) {
+  id: Bytes!
+  previousAdmin: Bytes! # address
+  newAdmin: Bytes! # address
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type BeaconUpgraded @entity(immutable: true) {
+  id: Bytes!
+  beacon: Bytes! # address
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type BorrowingFeePaid @entity(immutable: true) {
+  id: Bytes!
+  _asset: Bytes! # address
+  _borrower: Bytes! # address
+  _feeAmount: BigInt! # uint256
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type Initialized @entity(immutable: true) {
+  id: Bytes!
+  version: Int! # uint8
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type OwnershipTransferred @entity(immutable: true) {
+  id: Bytes!
+  previousOwner: Bytes! # address
+  newOwner: Bytes! # address
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type Upgraded @entity(immutable: true) {
+  id: Bytes!
+  implementation: Bytes! # address
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type VesselCreated @entity(immutable: true) {
+  id: Bytes!
+  _asset: Bytes! # address
+  _borrower: Bytes! # address
+  arrayIndex: BigInt! # uint256
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type VesselUpdated @entity(immutable: true) {
+  id: Bytes!
+  _asset: Bytes! # address
+  _borrower: Bytes! # address
+  _debt: BigInt! # uint256
+  _coll: BigInt! # uint256
+  stake: BigInt! # uint256
+  operation: Int! # uint8
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type Vessel @entity {
+  id: ID! # Unique identifier, e.g., a combination of borrower and asset
+  _borrower: Bytes! # Borrower's address
+  _asset: Bytes! # Asset's address
+  _status: Int! 
+  updates: [VesselUpdate!]! # Array of updates
+}
+
+type VesselUpdate @entity {
+  id: ID!
+  vessel: Vessel! @derivedFrom(field: "updates")
+  _debt: BigInt!
+  _coll: BigInt!
+  operation: Int!
+  stake: BigInt!
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type UserDeposit @entity {
+  id: ID! # Unique identifier, e.g., a combination of borrower and asset
+  _depositor: Bytes! # Borrower's address
+  _newDeposit: BigInt! # Asset's address
+  blockTimestamp: BigInt!
+  blockNumber: BigInt!
+  transactionHash: Bytes!
+}
